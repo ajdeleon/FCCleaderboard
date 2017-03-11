@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import MDSpinner from "react-md-spinner"
 
 import CamperList from "./camper_list"
 
@@ -10,7 +11,7 @@ export default class App extends Component {
       recentCampers: [],
       allTimeCampers: [],
       currentView: "recentCampers"
-    }; // this.state
+    } // this.state
   } // constructor
 
   componentWillMount() {
@@ -19,7 +20,7 @@ export default class App extends Component {
       this.setState({
         recentCampers: recentCampers.data,
         allTimeCampers: allTimeCampers.data,
-      }); // this.setState same as recentCampers: recentCampers ES6
+      }) // this.setState same as recentCampers: recentCampers ES6
     })) // axios
   } // componentWillMount
 
@@ -43,6 +44,9 @@ export default class App extends Component {
 
 
   render() {
+    if(!this.state.recentCampers.length && !this.state.recentCampers.length) {
+      return <MDSpinner className="spinner" size={100} />
+    }
     return (
       <div>
         <h2>{`Viewing Top ${this.state.currentView}`}</h2>
